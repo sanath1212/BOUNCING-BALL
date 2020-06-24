@@ -6,6 +6,7 @@ let time = 0;
 let speed = 0;
 let mass = 0.1;
 let wind_speed = 0;
+let drag = 100;
 
 function setup() {
 	createCanvas(800,  500);
@@ -14,14 +15,19 @@ function setup() {
 }
 
 function draw() {
+	print(y);
 	background(240);
 
-		gravity_physics();
-		wind_physics();
+	gravity_physics();
+	if (mouseIsPressed) {
+		wind_physics_user();
+	}
+	wind_physics();	
+	drag_physics();	
 
-		stroke(255, 0, 0, (255 / 1.5));
-		fill(255, 0, 0, (255 / 1.5));
-		ellipse(x, y, size, size);
+	stroke(255, 0, 0, (255 / 1.5));
+	fill(255, 0, 0, (255 / 1.5));
+	ellipse(x, y, size, size);
 }
 
 function massvalue() {
@@ -46,11 +52,21 @@ function gravity_physics() {
 
 function wind_physics() {
 	x += wind_speed;
+	edge();
+}
+
+function wind_physics_user() {
+	wind_speed += -1;
+	x += wind_speed;
+	edge();
 }
 
 function drag_physics() {
-
-	
+	speed -= drag;
+	time++;
+	weight = gravity * mass;
+	speed = weight * time;
+	edge();
 }
 
 function friction_physics() {
@@ -72,7 +88,6 @@ function edge() {
 			time = time * -1;
 		    speed = weight * time;
 		    time -= speed;
-		    y += speed;
 		}
 
 		if (x <(size / 2)) {
@@ -81,6 +96,5 @@ function edge() {
 			time = time * -1;
 		    speed = weight * time;
 		    time -= speed;
-		    y += speed;
 		}
 }

@@ -9,8 +9,12 @@
   </head>
   <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">BOUNCING BALL</a>
+      <form class="form-inline my-2 my-lg-0 mx-2">
+        <input class="form-control mr-sm-2" type="text" placeholder="wind Value        MAX 0.9" id="stop_wind_value_value">
+        <button type="button" class="btn btn-dark" onclick="stop_wind_value();">WIND</button>
+      </form>
       <form class="form-inline my-2 my-lg-0 mx-2">
         <input class="form-control mr-sm-2" type="text" placeholder="Mass Value        MAX 0.9" id="mass_value">
         <button type="button" class="btn btn-dark" onclick="massvalue();">Mass</button>
@@ -23,7 +27,8 @@
         <input class="form-control mr-sm-2" type="text" placeholder="Size Value" aria-label="Search" id="size_value">
         <button type="button" class="btn btn-dark"  onclick="sizevalue();">Size</button>
       </form>
-  </nav>
+    </nav>
+
   <br>
 
     <script src="sketch.js"></script>

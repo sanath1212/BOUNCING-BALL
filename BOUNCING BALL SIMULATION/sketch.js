@@ -18,7 +18,7 @@ class entity {
   constructor() {
     this.radius = 20;
     this.x = Math.floor((Math.random() * (width - ((this.radius / 2) + 10))) + 1);
-    this.y = Math.floor((Math.random() * height / 9) + 1);
+  	this.y = Math.floor((Math.random() * height / 9) + 1);
     this.time = 0;
     this.weight;
     this.gravity = 1;
@@ -130,8 +130,4 @@ function draw() {
     new_entity[i].edge();
     new_entity[i].display();
   }
-  stop_wind_value();
-  massvalue();
-  gravityvalue();
-  sizevalue();
 }

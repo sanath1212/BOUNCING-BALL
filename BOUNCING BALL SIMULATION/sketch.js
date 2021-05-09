@@ -2,8 +2,8 @@ var x;
 var y;
 var time;
 var weight;
-var gravity;
-var mass;
+var gravity = 1;
+var mass = 0.1;
 var speed;
 var wind;
 var pointx;
@@ -11,18 +11,15 @@ var pointy;
 var xacc;
 var x_final_velocity;
 var friction;
-var stop_wind;
-var radius;
+var stop_wind = 'START';
+var radius = 20;
 
 class entity {
   constructor() {
-    this.radius = 20;
-    this.x = Math.floor((Math.random() * (width - ((this.radius / 2) + 10))) + 1);
+    this.x = Math.floor((Math.random() * (width - ((radius / 2) + 10))) + 1);
     this.y = Math.floor((Math.random() * height / 9) + 1);
     this.time = 0;
     this.weight;
-    this.gravity = 1;
-    this.mass = 0.1;
     this.speed;
     this.wind = 0;
     this.pointx;
@@ -30,34 +27,17 @@ class entity {
     this.xacc = 0;
     this.x_final_velocity = 0;
     this.friction = 0.001;
-    this.stop_wind = 'START';
   }
-
-    stop_wind_value() {
-    	this.stop_wind = document.getElementById('stop_wind_value_value').value;
-    }
-
-		massvalue() {
-			this.mass = document.getElementById('mass_value').value;
-		}
-
-		gravityvalue() {
-			this.gravity = document.getElementById('gravity_value').value;
-		}
-
-		sizevalue() {
-			this.size = document.getElementById('size_value').value;
-		}
 
     gravity_physics() {
     	this.time++;
-    	this.weight = this.gravity * this.mass;
+    	this.weight = gravity * mass;
       this.speed = this.weight * this.time;
     	this.y += this.speed;
     }
 
     wind_physics() {
-    	if (this.stop_wind != 'STOP') {
+    	if (stop_wind != 'STOP') {
     		this.pointx = random(width);
     		this.pointy = random(height);
     		if (this.pointx > this.pointy) {
@@ -73,7 +53,7 @@ class entity {
     }
 
     friction_physics() {
-    	if (this.y > ((height - (this.radius / 2)) - 1.5)) {
+    	if (this.y > ((height - (radius / 2)) - 1.5)) {
     	    if (this.x_final_velocity < 0) {
     	      this.x_final_velocity += this.friction;
     	    }
@@ -88,18 +68,18 @@ class entity {
     // }
 
     edge() {
-    	if (this.y > (height - ((this.radius / 2) + 1))) {
+    	if (this.y > (height - ((radius / 2) + 1))) {
     		    this.time = this.time * -1;
     		    this.speed = this.weight * this.time;
     		    this.time -= this.speed;
     		    this.y += this.speed;
     	}
 
-    	if (this.x > (width - (this.radius / 2))) {
+    	if (this.x > (width - (radius / 2))) {
     		this.x_final_velocity *= -1;
     	}
 
-    	if (this.x <(this.radius / 2)) {
+    	if (this.x <(radius / 2)) {
     		this.x_final_velocity *= -1;
     	}
     }
@@ -107,7 +87,7 @@ class entity {
     display() {
       stroke(255, 0, 0, (255 / 1.5));
     	fill(255, 0, 0, (255 / 1.5));
-    	ellipse(this.x, this.y, this.radius, this.radius);
+    	ellipse(this.x, this.y, radius, radius);
     }
 }
 var no_of_entity = 100;
@@ -130,4 +110,20 @@ function draw() {
     new_entity[i].edge();
     new_entity[i].display();
   }
+}
+
+function stop_wind_value() {
+    stop_wind = document.getElementById('stop_wind_value_value').value;
+}
+
+function massvalue() {
+    mass = document.getElementById('mass_value').value;
+}
+
+function gravityvalue() {
+    gravity = document.getElementById('gravity_value').value;
+}
+
+function sizevalue() {
+    radius = document.getElementById('size_value').value;
 }

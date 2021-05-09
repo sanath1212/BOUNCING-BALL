@@ -13,6 +13,9 @@ var x_final_velocity;
 var friction;
 var stop_wind = 'START';
 var radius = 20;
+var red;
+var green;
+var blue;
 
 class entity {
   constructor() {
@@ -27,6 +30,9 @@ class entity {
     this.xacc = 0;
     this.x_final_velocity = 0;
     this.friction = 0.001;
+    this.red = Math.floor((Math.random() * 255) + 1);
+    this.green = Math.floor((Math.random() * 255) + 1);
+    this.blue = Math.floor((Math.random() * 255) + 1);
   }
 
     gravity_physics() {
@@ -85,12 +91,17 @@ class entity {
     }
 
     display() {
-      stroke(255, 0, 0, (255 / 1.5));
-    	fill(255, 0, 0, (255 / 1.5));
+      stroke(this.red, this.green, this.blue, (255 / 1.5));
+    	fill(this.red, this.green, this.blue,(255 / 1.2));
     	ellipse(this.x, this.y, radius, radius);
     }
+
+    new_entity_mouse() {
+      this.x = mouseX;
+      this.y = mouseY;
+    }
 }
-var no_of_entity = 100;
+var no_of_entity = 1;
 let new_entity = [];
 
 function setup() {
@@ -109,6 +120,11 @@ function draw() {
 		// new_entity[i].collision_physics();
     new_entity[i].edge();
     new_entity[i].display();
+  }
+  if (mouseIsPressed) {
+    no_of_entity++;
+    new_entity[no_of_entity - 1] = new entity();
+    new_entity[no_of_entity - 1].new_entity_mouse();print(no_of_entity);
   }
 }
 

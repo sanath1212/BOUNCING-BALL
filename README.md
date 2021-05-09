@@ -2,8 +2,8 @@
 This is a Java Script project which which runs the physics engine this engine contains gravity, mass, friction, wind force.
 
 # FEATURES
-//1.Now you can increase the number of entity [ball]
-2.you can change the value of these variables at runtime [gravity, mass, radius, wind force] 
+1.Now you can increase the number of entity [ball]\n
+2.you can change the value of these variables at runtime [gravity, mass, radius, wind force]\n
 3.It is easy to undustand the code and develop the new physics 
 4.You can pull request a new feature
 
